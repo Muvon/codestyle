@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+set -ex
+SOURCE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+which {gh,git,php} || exit 1
+
+# Validate inputs
+path="$1"
+lang="$2"
+
+if [[ -z "$path" || -z "$lang" ]]; then
+  echo "Usage: $0 [git|path] [lang]";
+  exit 1
+fi
+
+if [[ ! -d "$lang" ]]; then
+	echo >&2 "The programming language '$lang' is not supported."
+	exit 1
+fi
+
+# Now clone the passed repo
+is_repo=
+if [[ "$path" = git@* ]]; then
+  is_repo=1
+  mkdir -p repo
+  cd repo
+  name=$(echo "${path#*/}" | cut -d. -f1)
+  if [[ -d "$name" ]]; then
+    cd "$name"
+    git clean -fdx
+    git fetch
+    git pull origin main
+  else
+    git clone "$path" "$name"
+    cd "$name"
+  fi
+
+  # Check that the destination branch is merged
+  if git ls-remote --exit-code origin codestyle-update; then
+    echo "The target branch is not merged. Please merge it first and rerun the script.";
+    exit 1
+  fi
+else
+  if [[ ! -d "$path" ]]; then
+    echo 'The directory to the project '"$path"' does not exist'
+    exit 1
+  fi
+
+  cd "$path"
+fi
+
+# Update files in repository
+cp -r "$SOURCE_DIR/skel/"* .
+
+# Check that required directories exist and create it otherwise
+mkdir -p ./{src,test}
+
+# Check required composer dependencies
+declare -A packages=(
+  [vkcom/noverify]="^0.5"
+  [slevomat/coding-standard]="^8.5"
+  [squizlabs/php_codesniffer]="^3.7"
+)
+
+for package in "${!packages[@]}"; do
+  if ! composer show --self | grep "$package"; then
+    composer require --dev "$package":"${packages[$package]}"
+  fi
+done
+
+branch="codestyle-update"
+# Check if we have files updated and create the pull request
+updated=
+if test -d .git; then
+  updated=$(git status -s)
+fi
+
+if [[ -n "$is_repo" && -n "$updated" ]]; then
+  git add .
+  if git branch -a | grep " ${branch}$"; then
+    git branch -D "$branch"
+  fi
+  git checkout -b "$branch"
+  git commit -m 'Update PHP codestyle to the latest version'
+  git push origin codestyle-update
+  gh pr create --title 'Update PHP codestyle' --body 'Update PHP codestyle to the latest version'
+fi
+
+echo 'Done'

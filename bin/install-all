@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+if (!function_exists('yaml_parse')) {
+  throw new Exception('Failed to find yaml extension. Make sure that you have installed it.');
+}
+
+$source_dir = realpath(__DIR__ . '/..');
+$config = yaml_parse_file($source_dir . '/repo.yml');
+foreach ($config['repositories'] as $repository) {
+  shell_exec(
+		$source_dir . '/bin/install'
+			. ' ' . escapeshellarg($repository['path'])
+			. ' ' . escapeshellarg($repository['lang'])
+	);
+}
