@@ -49,29 +49,33 @@ else
   cd "$path"
 fi
 
-# Change the director to app for php lang
-if [[ "$lang" = "php" ]]; then
-	cd app
-fi
-
 # Update files in repository
 cp -r "$SOURCE_DIR/$lang/"* .
+case "$lang" in
+	php)
+		# Check required composer dependencies
+		declare -A packages=(
+			[vkcom/noverify]="^0.5"
+			[squizlabs/php_codesniffer]="^3.7"
+			[slevomat/coding-standard]="^8.5"
+			[wp-coding-standards/wpcs]="^2.3"
+		)
 
-# Check that required directories exist and create it otherwise
-mkdir -p ./{src,test}
-
-# Check required composer dependencies
-declare -A packages=(
-  [vkcom/noverify]="^0.5"
-  [slevomat/coding-standard]="^8.5"
-  [squizlabs/php_codesniffer]="^3.7"
-)
-
-for package in "${!packages[@]}"; do
-  if ! composer show --self | grep "$package"; then
-    composer require --dev "$package":"${packages[$package]}"
-  fi
-done
+		pushd "$(pwd)"
+		cd app
+		composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+		for package in "${!packages[@]}"; do
+			if ! composer show --self | grep "$package"; then
+				composer require --dev "$package":"${packages[$package]}"
+			fi
+		done
+		popd
+		;;
+	*)
+		echo >&2 "There is no '$lang' support yet"
+		exit 1
+		;;
+esac
 
 branch="codestyle-update"
 # Check if we have files updated and create the pull request
