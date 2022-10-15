@@ -50,7 +50,7 @@ else
 fi
 
 # Update files in repository
-cp -r "$SOURCE_DIR/$lang/"* .
+cp -r "$SOURCE_DIR/$lang/." .
 case "$lang" in
 	php)
 		# Check required composer dependencies
@@ -94,5 +94,8 @@ if [[ -n "$is_repo" && -n "$updated" ]]; then
   git push origin codestyle-update
   gh pr create --title 'Update PHP codestyle' --body 'Update PHP codestyle to the latest version'
 fi
+
+# Install local hooks
+pre-commit install-hooks
 
 echo 'Done'
