@@ -1,0 +1,7 @@
+repositories:
+  - path: git@github.com:Muvon/muvon.git
+    lang: php
+  - path: git@github.com:Muvon/overdeso.git
+    lang: php
+  - path: git@github.com:Muvon/overclout.git
+    lang: js
