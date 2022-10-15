@@ -2,7 +2,7 @@
 set -ex
 SOURCE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-which {gh,git,php} || exit 1
+which {gh,git,php,pre-commit} || exit 1
 
 # Validate inputs
 path="$1"
@@ -49,8 +49,13 @@ else
   cd "$path"
 fi
 
+# Change the director to app for php lang
+if [[ "$lang" = "php" ]]; then
+	cd app
+fi
+
 # Update files in repository
-cp -r "$SOURCE_DIR/skel/"* .
+cp -r "$SOURCE_DIR/$lang/"* .
 
 # Check that required directories exist and create it otherwise
 mkdir -p ./{src,test}
