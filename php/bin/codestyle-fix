@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+./app/vendor/bin/phpcbf -v -s --standard="$(pwd)/ruleset.xml" app/
