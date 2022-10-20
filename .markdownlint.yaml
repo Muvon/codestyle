@@ -1,0 +1,4 @@
+# Rules: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+# We use tabs and do not use spaces
+# Issue: https://github.com/DavidAnson/markdownlint/issues/82
+MD010: false
