@@ -29,6 +29,7 @@ bin/install "path/to/test/app/folder" react-ts
 
 Do not forget to enable hooks by using [pre-commit](https://pre-commit.com) by running inside the test app folder:
 
+
 For more information about codestyle for this setup [read here](react-ts/README.md).
 ```bash
 pre-commit install

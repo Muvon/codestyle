@@ -49,6 +49,9 @@ else
   cd "$path"
 fi
 
+# Install common files for all languages first
+cp -r "$SOURCE_DIR/common/." .
+
 # Update files in repository
 cp -r "$SOURCE_DIR/$lang/." .
 case "$lang" in
