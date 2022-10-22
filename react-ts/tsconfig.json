@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "es6",
+		"incremental": true,
+		"module": "esnext",
+		"checkJs": false,
+		"strict": true,
+		"noImplicitAny": false,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"typeRoots": ["./src/*.d.ts", "./node_modules/@types"],
+		"paths": {
+			"src/*": ["src/*"]
+		},
+		"allowJs": false,
+		"skipLibCheck": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
+		"jsx": "react-jsx"
+	},
+	"include": ["src", "types", "src/custom.d.ts"],
+	"paths": {
+		"src/*": ["src/*"]
+	}
+}

@@ -1,0 +1,194 @@
+{
+  "extends": ["plugin:import/errors", "plugin:import/warnings", "plugin:import/typescript", "airbnb", "prettier"],
+  "env": {
+    "browser": true
+  },
+  "plugins": ["react-hooks", "@typescript-eslint", "import", "simple-import-sort"],
+  "parser": "@typescript-eslint/parser",
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-use-before-define": 0,
+        "react/prop-types": "off",
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "error",
+        "no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          {
+            "allowShortCircuit": true,
+            "allowTernary": true
+          }
+        ],
+        "sort-imports": "off", // covered by simple-import-sort/imports
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Side effect imports.
+              ["^\\u0000"],
+              [
+                // Packages.
+                // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+                "^@?\\w",
+                // Absolute imports and other imports such as Vue-style `@/foo`.
+                // Anything that does not start with a dot.
+                "^[^.]",
+                // Absolute imports from our project's `src` folder
+                "^src/",
+                // Relative imports.
+                // Anything that starts with a dot.
+                "^\\."
+              ]
+            ]
+          }
+        ],
+        "simple-import-sort/exports": "error",
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-duplicates": "error",
+        "import/extensions": [
+          "error",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never",
+            "json": "always"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+        "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": ["**/*.test.*", "**/*.spec.*", "src/setupTests.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "no-restricted-imports": "off",
+        "no-console": "off"
+      }
+    },
+
+    {
+      "files": ["src/locale/**/*.*"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "error"
+      }
+    }
+  ],
+  "rules": {
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never",
+        "json": "always"
+      }
+    ],
+    "no-use-before-define": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "func-names": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "class-methods-use-this": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-fragments": ["error", "syntax"],
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": { "multiline": true, "consistent": true },
+        "ObjectPattern": { "multiline": true, "consistent": true },
+        "ImportDeclaration": { "multiline": true, "consistent": true },
+        "ExportDeclaration": { "multiline": true, "consistent": true }
+      }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "LabeledStatement",
+        "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+      },
+      {
+        "selector": "WithStatement",
+        "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+      }
+    ],
+    "no-unsafe-optional-chaining": "off",
+    "no-nonoctal-decimal-escape": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id", "_isMounted", "_url"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".tsx"] }],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "react/require-default-props": "off",
+    "react/style-prop-object": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        // enable warnings also for useDeepCompareEffect.
+        "additionalHooks": "useDeepCompareEffect"
+      }
+    ],
+    "no-shadow": "off",
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true
+      }
+    ],
+    // to be reviewed
+    "jsx-a11y/label-has-for": "off",
+    "react/no-array-index-key": "off",
+    "react/no-unused-prop-types": "off",
+    "react/jsx-closing-tag-location": "off",
+    "import/prefer-default-export": "off",
+    "newline-before-return": "error",
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "if", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "if" },
+      { "blankLine": "always", "prev": "while", "next": "*" },
+      { "blankLine": "always", "prev": "for", "next": "*" },
+      { "blankLine": "always", "prev": "do", "next": "*" },
+      { "blankLine": "always", "prev": "switch", "next": "*" },
+      { "blankLine": "always", "prev": "try", "next": "*" }
+    ],
+    "react/sort-comp": "off",
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "import/no-default-export": "warn",
+    "max-params": "warn",
+    "arrow-body-style": ["error", "as-needed"],
+    "prefer-arrow-callback": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
+      },
+      "alias": {
+        "map": [["src", "./src"]],
+        "extensions": [".ts", ".tsx", ".js", ".jsx", ".json"]
+      }
+    }
+  }
+}
