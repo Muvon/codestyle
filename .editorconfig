@@ -5,6 +5,8 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+visual_wrap = true
+max_line_length = 120
 
 [*]
 indent_style = tab
@@ -15,5 +17,9 @@ indent_style = space
 indent_size = 2
 
 [**.yml]
+indent_style = space
+indent_size = 2
+
+[**.md]
 indent_style = space
 indent_size = 2
