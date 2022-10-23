@@ -1,20 +1,19 @@
 <?xml version="1.0"?>
 <!-- Customizable PHP Codesniffer sniffs: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties -->
 <!-- Slevomat standard sniffs: https://github.com/slevomat/coding-standard#sniffs-included-in-this-standard -->
-<!-- Wordpress to look: https://github.com/WordPress/WordPress-Coding-Standards/blob/004a90934ff66e8fcc46708eaf0dac22f2f4fa14/WordPress-Core/ruleset.xml -->
 <ruleset name="muvon-codestyle">
 	<description>A custom coding standard used by Muvon Co. Ltd projects</description>
 	<include-pattern>*\.php$</include-pattern>
-	<exclude-pattern>app/vendor/*</exclude-pattern>
-	<config name="installed_paths" value="app/vendor/wp-coding-standards/wpcs,app/vendor/slevomat/coding-standard"/>
-	<rule ref="app/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Arrays/TrailingArrayCommaSniff.php" />
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<config name="installed_paths" value="vendor/slevomat/coding-standard,vendor/muvon/coding-standard"/>
+	<rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Arrays/TrailingArrayCommaSniff.php" />
 	<rule
-		ref="app/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php">
+		ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php">
 		<properties>
 			<property name="caseSensitive" value="true" />
 		</properties>
 	</rule>
-	<rule ref="app/vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php">
+	<rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php">
 		<properties>
 			<property name="declareOnFirstLine" value="true" />
 			<property name="linesCountBeforeDeclare" value="0" />
@@ -36,7 +35,7 @@
 	<rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference" />
 	<rule ref="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator" />
 	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
-	<rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint" />
+	<!-- <rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint" /> -->
 	<rule ref="SlevomatCodingStandard.PHP.TypeCast" />
 	<rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired" />
 	<rule ref="SlevomatCodingStandard.Complexity.Cognitive">
@@ -162,8 +161,8 @@
 			<property name="requiredSpacesBeforeColon" value="0" />
 		</properties>
 	</rule>
-	<rule ref="WordPress.NamingConventions.ValidFunctionName"/>
-	<rule ref="WordPress.NamingConventions.ValidVariableName"/>
 	<rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
 	<rule ref="Generic.PHP.LowerCaseType"/>
+	<rule ref="vendor/muvon/coding-standard/src/Sniffs/NamingConventions/ValidConstantNameSniff.php"/>
+	<rule ref="vendor/muvon/coding-standard/src/Sniffs/NamingConventions/ValidVariableNameSniff.php"/>
 </ruleset>

@@ -18,6 +18,8 @@ if [[ ! -d "$lang" ]]; then
 	exit 1
 fi
 
+source_dirs=(app src)
+
 # Now clone the passed repo
 is_repo=
 if [[ "$path" = git@* ]]; then
@@ -61,11 +63,20 @@ case "$lang" in
 			[vkcom/noverify]="^0.5"
 			[squizlabs/php_codesniffer]="^3.7"
 			[slevomat/coding-standard]="^8.5"
-			[wp-coding-standards/wpcs]="^2.3"
+			[muvon/coding-standard]="dev-master"
 		)
 
 		pushd "$(pwd)"
-		cd app
+		company_name="$(git remote get-url origin | cut -d: -f2 | cut -d/ -f1 | tr '[:upper:]' '[:lower:]')"
+		project_name="${PWD##*/}"
+		for dir in "${source_dirs[@]}"; do
+			if test -d "$dir"; then
+				cd "$dir"
+				break
+			fi
+		done
+
+		test ! -f composer.json && composer init --name="$company_name/$project_name" --type="project" --no-interaction
 		composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
 		for package in "${!packages[@]}"; do
 			if ! composer show --self | grep "$package"; then
@@ -125,6 +136,6 @@ if [[ -n "$is_repo" && -n "$updated" ]]; then
 fi
 
 # Install local hooks
-pre-commit install-hooks
+pre-commit install
 
 echo 'Done'

@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
+cd app || exit 1
 if [[ ! -f "./vendor/bin/noverify" ]]; then
-	./app/vendor/bin/noverify-get
+	./vendor/bin/noverify-get
 fi
 
 # --exclude-checks='undefined'
-./app/vendor/bin/noverify check --allow-all-checks app/
+./vendor/bin/noverify check --allow-all-checks \
+	--exclude-checks=useExitOrDie \
+	--fix .
