@@ -1,6 +1,6 @@
 # Muvon code standard
 
-Code style and helper tools for all languages that Muvon Co. Ltd uses
+Code style and helper tools for all languages that Muvon Un Limited uses
 
 ## Common
 
