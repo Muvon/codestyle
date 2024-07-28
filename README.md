@@ -10,7 +10,7 @@ Code style and helper tools for all languages that Muvon Un Limited uses
 ## PHP
 
 * PHP CodeSniffer for a code style check
-* VK noverify for static analyzing
+* PHPStan for static analyzing
 
 ## React + TS
 
