@@ -5,5 +5,4 @@ parameters:
 	scanFiles:
 		- core.php
 	scanDirectories:
-		- plugin
 		- vendor
