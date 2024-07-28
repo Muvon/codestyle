@@ -60,7 +60,7 @@ case "$lang" in
 	php)
 		# Check required composer dependencies
 		declare -A packages=(
-			[vkcom/noverify]="^0.5"
+			[phpstan/phpstan]="^1.11.7"
 			[squizlabs/php_codesniffer]="dev-master"
 			[slevomat/coding-standard]="^8.5"
 			[muvon/coding-standard]="dev-master"
