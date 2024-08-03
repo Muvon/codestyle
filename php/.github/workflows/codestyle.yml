@@ -45,10 +45,12 @@ jobs:
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
       - name: Upload image as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: codestyle-php-image
           path: /tmp/codestyle-php-image.tar
+          retention-days: 1
+          overwrite: true
 
   style-linting:
     name: PHPCS style linting
