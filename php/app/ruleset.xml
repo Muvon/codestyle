@@ -30,7 +30,12 @@
 	<rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators" />
 	<rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure" />
 	<rule ref="SlevomatCodingStandard.Functions.UnusedParameter" />
-	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable" />
+	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable">
+		<properties>
+			<property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true"/>
+		</properties>
+		<exclude-pattern>app/actions/*</exclude-pattern>
+	</rule>
 	<rule ref="SlevomatCodingStandard.Variables.UselessVariable" />
 		<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
 		<properties>
@@ -103,6 +108,8 @@
 	<rule ref="Generic.PHP.ForbiddenFunctions">
 		<properties>
 			<property name="forbiddenFunctions" type="array">
+				<element key="call_user_func" value="null" />
+				<element key="call_user_func_array" value="null" />
 				<element key="count" value="sizeof" />
 				<element key="print" value="echo" />
 				<element key="is_null" value="null" />
@@ -112,6 +119,7 @@
 				<element key="array" value="null" />
 				<element key="strval" value="null" />
 				<element key="intval" value="null" />
+				<element key="floatval" value="null" />
 			</property>
 		</properties>
 	</rule>
