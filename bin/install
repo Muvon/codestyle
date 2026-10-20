@@ -62,19 +62,13 @@ case "$lang" in
 		declare -A packages=(
 			[phpstan/phpstan]="^1.11.7"
 			[squizlabs/php_codesniffer]="dev-master"
-			[slevomat/coding-standard]="^8.5"
+			[slevomat/coding-standard]="^8.22"
 			[muvon/coding-standard]="dev-master"
 		)
 
 		pushd "$(pwd)"
 		company_name="$(git remote get-url origin | cut -d: -f2 | cut -d/ -f1 | tr '[:upper:]' '[:lower:]')"
 		project_name="${PWD##*/}"
-		for dir in "${source_dirs[@]}"; do
-			if test -d "$dir"; then
-				cd "$dir"
-				break
-			fi
-		done
 
 		test ! -f composer.json && composer init --name="$company_name/$project_name" --type="project" --no-interaction
 		composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer true

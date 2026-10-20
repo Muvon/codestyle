@@ -4,7 +4,6 @@
 <ruleset name="muvon-codestyle">
 	<description>A custom coding standard used by Muvon Un Limited projects</description>
 	<include-pattern>*\.php$</include-pattern>
-	<exclude-pattern>app/core.php</exclude-pattern>
 	<exclude-pattern>vendor/*</exclude-pattern>
 	<exclude-pattern>app/client/*</exclude-pattern>
 	<config name="installed_paths" value="vendor/slevomat/coding-standard,vendor/muvon/coding-standard"/>

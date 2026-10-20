@@ -35,6 +35,13 @@ For more information about codestyle for this setup [read here](react-ts/README.
 pre-commit install
 ```
 
+## Rust
+
+* rustfmt with tabs and a 120-column limit: [rust/rustfmt.toml](rust/rustfmt.toml)
+* Every Rust repo commits an identical copy as `rustfmt.toml` at its root. rustfmt has no remote config, so the copy is required.
+* The `style-check` step in [Muvon/ci-workflow](https://github.com/Muvon/ci-workflow) `rust-ci.yml` fails when a repo's copy differs from this file.
+* To change the standard: edit this file, then copy it to every Rust repo and run `cargo fmt --all` there.
+
 ## Markdown
 
 * We use tabs in `*md` files and as for now there is no such rule for linter
